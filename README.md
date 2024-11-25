@@ -1,3 +1,4 @@
+# fluffy-carnival
 ## Sample [FastAPI](https://fastapi.tiangolo.com/) Application to demonstrate Async architecture with [Celery](https://docs.celeryproject.org/), [RabbitMQ](https://www.rabbitmq.com/) and [Flower](https://flower.readthedocs.io/en/latest/)
 
 ![alt text](fast-api-celery.png)
@@ -101,5 +102,3 @@ Please check out the article for further details.
 * https://flower.readthedocs.io/en/latest/
 * https://stackoverflow.com/questions/21233089/how-to-use-the-shared-task-decorator-for-class-based-tasks
 * http://ask.github.io/celery/userguide/groups.html#groups
-# fluffy-carnival
-# fluffy-carnival
