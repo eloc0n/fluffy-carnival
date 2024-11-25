@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+celery
+flower
+httpx
+pika
+sqlalchemy
+psycopg2-binary
