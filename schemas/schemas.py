@@ -7,7 +7,7 @@ class Country(BaseModel):
     countries: List[str]
 
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "countries": ['turkey', 'india'],
             }
