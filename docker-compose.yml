@@ -8,12 +8,15 @@ networks:
 
 services:
   fastapi:
-    image: fastapi
+    image: fastapi:latest
     env_file:
       - .env
     build:
       context: .
       dockerfile: Dockerfile.fastapi
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - ${PWD}:/app
     depends_on:
       - rabbitmq
       - db
@@ -70,12 +73,9 @@ services:
       - db_net
       - fastapi_net
   celery:
-    image: celery
+    image: fastapi:latest
     env_file:
       - .env
-    build:
-      context: .
-      dockerfile: Dockerfile.fastapi
     depends_on:
       - fastapi
       - rabbitmq

@@ -7,7 +7,11 @@ from celery_tasks.tasks import get_all_universities_task, get_university_task
 from config.celery_utils import get_task_info
 from schemas.schemas import Country
 
-router = APIRouter(prefix='/universities', tags=['University'], responses={404: {"description": "Not found"}})
+router = APIRouter(
+    prefix="/universities",
+    tags=["University"],
+    responses={404: {"description": "Not found"}},
+)
 
 
 @router.post("/")

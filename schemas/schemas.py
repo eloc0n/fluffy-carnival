@@ -9,7 +9,7 @@ class Country(BaseModel):
     class Config:
         json_schema_extra = {
             "example": {
-                "countries": ['turkey', 'india'],
+                "countries": ["turkey", "india"],
             }
         }
 

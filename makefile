@@ -4,12 +4,14 @@ ifeq (, $(shell which docker-compose))
 else
     DC = docker-compose
 endif
+APP_NAME=fastapi
 UID = $(shell id -u)
 
 
 # Format python files.
 format:
-	${DC} run --no-deps --user ${UID} fastapi bash -c "ruff check --fix . && ruff format ."
+	${DC} up --remove-orphans --no-deps -d $(APP_NAME)
+	${DC} exec --user ${UID} $(APP_NAME) bash -c "ruff check --fix . && ruff format ."
 
 # Build docker images.
 build:
@@ -19,10 +21,24 @@ build:
 start:
 	${DC} up --remove-orphans
 
+alembic-init:
+	$(DC) run --rm --no-deps $(APP_NAME) bash -c "alembic init alembic"
+
+alembic-revision:
+	@read -p "Enter revision message: " msg; \
+	$(DC) run --rm --no-deps $(APP_NAME) bash -c "alembic revision --autogenerate -m '$$msg'"
+
+alembic-downgrade:
+	@read -p "Enter downgrade revision: " msg; \
+	$(DC) run --rm --no-deps $(APP_NAME) bash -c "alembic downgrade '$$msg'"
+
+alembic-upgrade:
+	$(DC) run --rm $(APP_NAME) bash -c "alembic upgrade head"
+
 # Run tests.
 test:
 	${DC} ...
 
 # Exec bash shell on fastapi container.
 shell:
-	${DC} run --user ${UID} --rm fastapi bash
+	${DC} run --user ${UID} --rm $(APP_NAME) bash

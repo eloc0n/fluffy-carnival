@@ -10,3 +10,4 @@ alembic
 pydantic-settings
 python-dotenv
 psycopg[binary]
+sqlmodel
