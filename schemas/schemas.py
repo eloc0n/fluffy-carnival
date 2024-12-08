@@ -20,3 +20,13 @@ class University(BaseModel):
     name: Optional[str] = None
     alpha_two_code: Optional[str] = None
     domains: List[str] = []
+
+
+class CountryResponse(BaseModel):
+    id: int
+    name: str
+    alpha_two_code: str
+    universities: Optional[List[str]]
+
+    class Config:
+        from_attributes = True

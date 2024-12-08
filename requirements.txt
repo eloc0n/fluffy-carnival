@@ -11,3 +11,6 @@ pydantic-settings
 python-dotenv
 psycopg[binary]
 sqlmodel
+aiohttp
+aio-pika
+asyncpg

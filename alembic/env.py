@@ -17,7 +17,9 @@ fileConfig(config.config_file_name)
 # target_metadata = mymodel.Base.metadata
 # target_metadata = None
 
-from models import SQLModel  # noqa
+# Import SQLModel and your models
+
+from sqlmodel import SQLModel  # noqa type: ignore
 from config.settings import settings  # noqa
 
 target_metadata = SQLModel.metadata

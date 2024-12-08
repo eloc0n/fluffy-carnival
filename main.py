@@ -7,7 +7,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from config.celery_utils import create_celery
-from routers import universities
+from crud import universities
 
 
 app = FastAPI(

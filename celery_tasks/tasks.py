@@ -2,7 +2,7 @@ from typing import List
 
 from celery import shared_task
 
-from api import universities
+from service import universities
 
 
 @shared_task(
@@ -16,7 +16,6 @@ def get_all_universities_task(self, countries: List[str]):
     data: dict = {}
     for cnt in countries:
         data.update(universities.get_all_universities_for_country(cnt))
-    print("---- data -----", data)
     return data
 
 

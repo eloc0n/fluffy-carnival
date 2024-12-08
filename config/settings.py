@@ -1,3 +1,4 @@
+import os
 from pydantic import PostgresDsn, computed_field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic_core import MultiHostUrl
@@ -17,14 +18,23 @@ class Settings(BaseSettings):
     POSTGRES_PASSWORD: str = ""
     POSTGRES_DB: str = ""
 
+    # Define whether the app is running in Docker or locally
+    ENVIRONMENT: str = os.getenv(
+        "ENVIRONMENT", "local"
+    )  # Default to 'local' if not set
+
     @computed_field
     @property
     def SQLALCHEMY_DATABASE_URI(self) -> PostgresDsn:
+        # Check environment and adjust host accordingly
+        host = self.POSTGRES_SERVER
+        if self.ENVIRONMENT == "docker":
+            host = "db"  # This is the Docker service name
         return MultiHostUrl.build(
             scheme="postgresql+psycopg",
             username=self.POSTGRES_USER,
             password=self.POSTGRES_PASSWORD,
-            host=self.POSTGRES_SERVER,
+            host=host,
             port=self.POSTGRES_PORT,
             path=self.POSTGRES_DB,
         )

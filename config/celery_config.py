@@ -14,8 +14,10 @@ class BaseConfig:
     CELERY_BROKER_URL: str = os.environ.get(
         "CELERY_BROKER_URL", "amqp://guest:guest@rabbitmq:5672//"
     )
-    CELERY_RESULT_BACKEND: str = os.environ.get("CELERY_RESULT_BACKEND", "rpc://")
-
+    CELERY_RESULT_BACKEND: str = os.environ.get(
+        "CELERY_RESULT_BACKEND", "rpc://"
+    )  # TODO: Should add Redis
+    CELERY_ACKS_LATE = False  # NOTE: Sometimes, tasks might be pending due to acknowledgment issues between Celery and RabbitMQ
     CELERY_TASK_QUEUES: list = (
         # default queue
         Queue("celery"),

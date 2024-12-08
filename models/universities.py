@@ -1,6 +1,7 @@
-from typing import List, Optional
+from typing import List
+from sqlalchemy import String
 from sqlalchemy.dialects.postgresql import ARRAY
-from sqlmodel import Field, Relationship, SQLModel  # type: ignore
+from sqlmodel import Field, Relationship, SQLModel, Column  # type: ignore
 
 
 """
@@ -49,5 +50,5 @@ class University(SQLModel, table=True):
     country: Country = Relationship(back_populates="universities")
 
     # Use ARRAY field to store lists of web pages and domains
-    web_pages: Optional[List[str]] = Field(default=[], sa_column=ARRAY)
-    domains: Optional[List[str]] = Field(default=[], sa_column=ARRAY)
+    web_pages: List[str] = Field(sa_column=Column(ARRAY(String)), default=[])
+    domains: List[str] = Field(sa_column=Column(ARRAY(String)), default=[])

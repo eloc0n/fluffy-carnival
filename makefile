@@ -35,6 +35,10 @@ alembic-downgrade:
 alembic-upgrade:
 	$(DC) run --rm $(APP_NAME) bash -c "alembic upgrade head"
 
+# Run the worker
+worker:
+	$(DC) run --rm $(APP_NAME) python service/consumer.py
+
 # Run tests.
 test:
 	${DC} ...
